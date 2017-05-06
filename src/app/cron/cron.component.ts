@@ -18,6 +18,9 @@ import { NgForm } from '@angular/forms';
         <p>
             <strong>Pretty Cron: </strong><span>{{prettyCronMessage}}</span>
         </p>
+        <p>
+            <strong>Next Run Time: </strong><span>{{nextRunTime}}</span>
+        </p>
         </div>
     </div>
     `,
@@ -31,6 +34,7 @@ import { NgForm } from '@angular/forms';
 export class CronComponent implements OnInit {
 
     prettyCronMessage: string;
+    nextRunTime: string;
 
     constructor() { }
 
@@ -41,6 +45,7 @@ export class CronComponent implements OnInit {
         const expression = parseForm.value.expression;
 
         this.prettyCronMessage = prettyCron.toString(expression);
+        this.nextRunTime = prettyCron.getNext(expression);
 
         console.log(prettyCron.getNext(expression));
     }
